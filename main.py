@@ -23,8 +23,18 @@ origem = r"" # Pasta aonde estão as planilhas
 links = [
 "https://royalagrocereais-my.sharepoint.com/:x:/g/personal/vitor_ramos_royalagro_com_br/EV7wPKMhqrdBmLTM7ImqXvQBWv7-ILLdlYKvbIRlRWVhWA?e=l7lACH&nav=MTVfezkwRDM4QzdELUJGQzktNDZDNS1BMDEwLThGQUJENzQ1RUNDQX0",
 "https://royalagrocereais-my.sharepoint.com/:x:/g/personal/vitor_ramos_royalagro_com_br/EV7wPKMhqrdBmLTM7ImqXvQBWv7-ILLdlYKvbIRlRWVhWA?e=zODa77&nav=MTVfezM4ODBERkVFLURFRkMtNDAzRC1BNTJELTU1QjY2QjkyQzBFN30",
-"https://royalagrocereais-my.sharepoint.com/:x:/g/personal/vitor_ramos_royalagro_com_br/EV7wPKMhqrdBmLTM7ImqXvQBWv7-ILLdlYKvbIRlRWVhWA?e=c9XgrX&nav=MTVfezIzN0QwMTBBLUQ2MzYtNDRDQy1CRTNFLTdBQzI4RUQxRkZDQ30"
+"https://royalagrocereais-my.sharepoint.com/:x:/g/personal/vitor_ramos_royalagro_com_br/EV7wPKMhqrdBmLTM7ImqXvQBWv7-ILLdlYKvbIRlRWVhWA?e=c9XgrX&nav=MTVfezIzN0QwMTBBLUQ2MzYtNDRDQy1CRTNFLTdBQzI4RUQxRkZDQ30",
+"https://royalagrocereais-my.sharepoint.com/:x:/g/personal/vitor_ramos_royalagro_com_br/EV7wPKMhqrdBmLTM7ImqXvQBWv7-ILLdlYKvbIRlRWVhWA?e=8gZfKQ&nav=MTVfezY4RTgyM0NELTA1MTQtNDE0RS04MkQwLUU0MjExMzNGQTQ5MX0"
 ] # Links em ordem já preestabelecida, pode ser substituido por um dicionario futuramente
+for arquivo in os.listdir(origem): #For pra excluir todos os arqquivos que não estejam filtrados
+    caminho_arquivo = os.path.join(origem, arquivo)
+    if 'Filtrado' not in arquivo and os.path.isfile(caminho_arquivo):
+        try:
+            os.remove(caminho_arquivo)
+            print(f'Arquivo {arquivo} excluído com sucesso.')
+        except Exception as e:
+            print(f'Erro ao excluir o arquivo {arquivo}: {e}')
+            
 for caminho, subpasta, arquivos in os.walk(origem):
     for contador,(nome) in enumerate(arquivos): # UMA EXECUÇÃO POR ARQUIVO
         arq = caminho+"\\"+nome
@@ -34,6 +44,7 @@ for caminho, subpasta, arquivos in os.walk(origem):
         pg.write(links[contador])
         pg.press('enter')
         img = detectarImagem('imagens/selectAll.png')
+        pg.press('home')
         pg.click(img)
         img = detectarImagem('imagens/allSelected.png')
         pg.press('delete')
