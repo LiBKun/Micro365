@@ -37,6 +37,7 @@ for arquivo in os.listdir(origem): #For pra excluir todos os arqquivos que não 
             
 for caminho, subpasta, arquivos in os.walk(origem):
     for contador,(nome) in enumerate(arquivos): # UMA EXECUÇÃO POR ARQUIVO
+        print(contador)
         arq = caminho+"\\"+nome
         copiar_para_area_de_transferencia(arq)
         pg.hotkey('ctrl', 't')
